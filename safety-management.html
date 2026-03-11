@@ -265,4 +265,593 @@ body{font-family:sans-serif;background:#f4f5f7;color:#1a1a1a;min-height:100vh;fo
           <tbody id="issueTbody"></tbody>
         </table>
       </div>
-      <div class="ffoot">Mus
+      <div class="ffoot">Musaffah25, Plot No. 17, Abu Dhabi United Arab Emirates. P.O Box 91646<br>Tel: 02-5544554, Fax: 02-5544554 | E-mail: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="046d6a626b44676c616a6b706c2a676b69">[email&#160;protected]</a> | Web: www.chenoth.com</div>
+    </div>
+  </div>
+  <div class="pg" id="pgUsers">
+    <div class="pghd">&#128101; Registered Users</div>
+    <div class="utcard">
+      <div class="srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="userSearch" placeholder="Search users..."></div>
+      <div style="overflow-x:auto"><table class="utbl"><thead><tr><th>SL</th><th>Name</th><th>Username</th><th>Email</th><th>Contact</th><th>Dept</th><th>Designation</th><th>Role</th><th>Registered</th><th>Action</th></tr></thead><tbody id="usersTbody"></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD EMP MODAL -->
+<div class="movo" id="moAdd"><div class="mbox">
+  <button class="mcl" id="moAddCl">&#x2715;</button><h3>Add New Employee</h3>
+  <div class="f2"><div class="fg"><label>Employee Name *</label><input type="text" id="aName" placeholder="Full name"></div><div class="fg"><label>Trade *</label><input type="text" id="aTrade" placeholder="e.g. Fitter"></div></div>
+  <div class="f2"><div class="fg"><label>ID No. *</label><input type="text" id="aIdno" placeholder="e.g. 1003"></div><div class="fg"><label>Nationality</label><input type="text" id="aNation"></div></div>
+  <div class="f2"><div class="fg"><label>Department</label><input type="text" id="aDept"></div><div class="fg"><label>Contact No.</label><input type="text" id="aContact"></div></div>
+  <div class="f2"><div class="fg"><label>Date of Joining</label><input type="date" id="aDoj"></div><div class="fg"><label>Status</label><select id="aStatus"><option>Active</option><option>Inactive</option></select></div></div>
+  <div class="ferr" id="aErr"></div>
+  <div class="mbtns"><button class="bblack" id="saveEmpBtn">Add Employee</button><button class="bghost" id="moAddCl2">Cancel</button></div>
+</div></div>
+
+<!-- EDIT EMP MODAL -->
+<div class="movo" id="moEdit"><div class="mbox">
+  <button class="mcl" id="moEditCl">&#x2715;</button><h3>&#9998; Edit Employee</h3>
+  <input type="hidden" id="eOrig">
+  <div class="f2"><div class="fg"><label>Employee Name *</label><input type="text" id="eName"></div><div class="fg"><label>Trade *</label><input type="text" id="eTrade"></div></div>
+  <div class="f2"><div class="fg"><label>ID No. *</label><input type="text" id="eIdno"></div><div class="fg"><label>Nationality</label><input type="text" id="eNation"></div></div>
+  <div class="f2"><div class="fg"><label>Department</label><input type="text" id="eDept"></div><div class="fg"><label>Contact No.</label><input type="text" id="eContact"></div></div>
+  <div class="f2"><div class="fg"><label>Date of Joining</label><input type="date" id="eDoj"></div><div class="fg"><label>Status</label><select id="eStatus"><option>Active</option><option>Inactive</option></select></div></div>
+  <div class="ferr" id="eErr"></div>
+  <div class="mbtns"><button class="bblack" id="saveEditBtn">Save Changes</button><button class="bghost" id="moEditCl2">Cancel</button></div>
+</div></div>
+
+<!-- EDIT ROW MODAL -->
+<div class="movo" id="moRow"><div class="mbox" style="max-width:540px">
+  <button class="mcl" id="moRowCl">&#x2715;</button><h3>&#9998; Edit Row <span id="erRowNum"></span></h3>
+  <input type="hidden" id="erIdx">
+  <div class="f2"><div class="fg"><label>Date</label><input type="date" id="erDate"></div><div class="fg"><label>Coverall</label><input type="text" id="erCoverall"></div></div>
+  <div class="f2"><div class="fg"><label>Shoes</label><input type="text" id="erShoes"></div><div class="fg"><label>Helmet</label><input type="text" id="erHelmet"></div></div>
+  <div class="f2"><div class="fg"><label>S.Glass</label><input type="text" id="erSglass"></div><div class="fg"><label>S.Jacket</label><input type="text" id="erSjacket"></div></div>
+  <div class="f2"><div class="fg"><label>Tools Given</label><input type="text" id="erToolsGiven"></div><div class="fg"><label>Tools Returned</label><input type="text" id="erToolsRet"></div></div>
+  <div class="f2"><div class="fg"><label>Employee Sign</label><input type="text" id="erEmpSign"></div><div class="fg"><label>Issued By</label><input type="text" id="erIssuedBy"></div></div>
+  <div class="mbtns"><button class="bblack" id="saveRowBtn">&#10003; Save Row</button><button class="bghost" id="moRowCl2">Cancel</button></div>
+</div></div>
+
+<!-- RESET PASSWORD MODAL -->
+<div class="movo" id="moResetPw"><div class="mbox" style="max-width:420px">
+  <button class="mcl" id="moResetCl">&#x2715;</button><h3>&#128273; Reset My Password</h3>
+  <p style="color:#6b7280;font-size:13px;margin-bottom:16px;">Change your account password.</p>
+  <div class="fg"><label>Current Password *</label><div class="pww"><input type="password" id="rpCurrent"><button class="pwt" id="rpCurT">&#128065;</button></div></div>
+  <div class="fg"><label>New Password *</label><div class="pww"><input type="password" id="rpNew" placeholder="Min 6 characters"><button class="pwt" id="rpNewT">&#128065;</button></div></div>
+  <div class="fg"><label>Confirm New Password *</label><div class="pww"><input type="password" id="rpNew2"><button class="pwt" id="rpNew2T">&#128065;</button></div></div>
+  <div class="ferr" id="rpErr"></div><div class="fok" id="rpOk"></div>
+  <div class="mbtns"><button class="bblack" id="saveResetBtn">Update Password</button><button class="bghost" id="moResetCl2">Cancel</button></div>
+</div></div>
+
+<div id="toast"></div>
+
+<!-- FIREBASE SDK -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+// ── FIREBASE CONFIG (Ritik's project) ──
+const firebaseConfig = {
+  apiKey: "AIzaSyBS5JZBtPAXa729dMb88_ypzu02zkp7ofA",
+  authDomain: "safety-management-11963.firebaseapp.com",
+  projectId: "safety-management-11963",
+  storageBucket: "safety-management-11963.firebasestorage.app",
+  messagingSenderId: "957048443027",
+  appId: "1:957048443027:web:7180b8486b048324e7bd66"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+// ── COLLECTIONS ──
+const USERS_COL    = "sms_users";
+const EMP_COL      = "sms_employees";
+const ISSUES_COL   = "sms_issues";
+
+// ── STATE ──
+let sysUsers   = [];
+let employees  = [];
+let issueData  = {};
+let session    = null;
+let currentEmp = null;
+const FIELDS   = ['date','coverall','shoes','helmet','sglass','sjacket','toolsgiven','toolsret','empsign','issuedby'];
+
+// ── LOCAL SESSION ──
+// Force re-login on new version
+const SESSION_VER = '3';
+try { const sv = JSON.parse(localStorage.getItem('sms_session')); if(sv && sv.ver === SESSION_VER) session = sv; else { localStorage.removeItem('sms_session'); session = null; } } catch(e){ session = null; }
+
+// ── HELPERS ──
+function isAdmin(){ return session && session.role === 'admin'; }
+function g(id){ return document.getElementById(id); }
+function v(id){ return g(id).value.trim(); }
+function sv(id, val){ g(id).value = val || ''; }
+function hideEl(id){ g(id).style.display='none'; }
+function showEl(id, msg){ if(msg!==undefined) g(id).textContent=msg; g(id).style.display='block'; }
+function showLoading(on){ g('loadingBar').style.display = on ? 'block' : 'none'; }
+function showSync(on){ g('syncBadge').classList.toggle('on', on); }
+
+function showToast(msg){
+  var el=g('toast'); el.textContent=msg; el.classList.add('on');
+  setTimeout(function(){ el.classList.remove('on'); }, 2800);
+}
+function showPage(id){
+  document.querySelectorAll('.pg').forEach(function(p){ p.classList.remove('on'); });
+  g(id).classList.add('on');
+}
+function openModal(id){ g(id).classList.add('on'); }
+function closeModal(id){ g(id).classList.remove('on'); }
+
+// ── FIREBASE CRUD ──
+async function fbSetUser(u){
+  await setDoc(doc(db, USERS_COL, u.username), u);
+}
+async function fbGetAllUsers(){
+  const snap = await getDocs(collection(db, USERS_COL));
+  return snap.docs.map(d => d.data());
+}
+async function fbDeleteUser(username){
+  await deleteDoc(doc(db, USERS_COL, username));
+}
+async function fbSetEmp(e){
+  await setDoc(doc(db, EMP_COL, e.idno), e);
+}
+async function fbGetAllEmps(){
+  const snap = await getDocs(collection(db, EMP_COL));
+  return snap.docs.map(d => d.data());
+}
+async function fbDeleteEmp(idno){
+  await deleteDoc(doc(db, EMP_COL, idno));
+}
+async function fbSetIssues(empId, rows){
+  await setDoc(doc(db, ISSUES_COL, empId), { rows: rows });
+}
+async function fbGetIssues(empId){
+  const snap = await getDoc(doc(db, ISSUES_COL, empId));
+  return snap.exists() ? (snap.data().rows || []) : [];
+}
+async function fbDeleteIssues(empId){
+  await deleteDoc(doc(db, ISSUES_COL, empId));
+}
+
+// ── INIT: Load data from Firebase ──
+async function initApp(){
+  showLoading(true);
+  try {
+    sysUsers  = await fbGetAllUsers();
+    employees = await fbGetAllEmps();
+    // Seed admin if not exists
+    if(!sysUsers.find(u => u.username === 'admin')){
+      const adminUser = {
+        username:'admin', password:'admin123', role:'admin', name:'Administrator',
+        email:'admin@petrotechnic.com', contact:'', dept:'Management', desig:'System Admin',
+        secQ:'What is your employee ID number?', secA:'admin',
+        registeredOn: new Date().toISOString()
+      };
+      await fbSetUser(adminUser);
+      sysUsers.push(adminUser);
+    }
+    showLoading(false);
+    if(session) launchApp();
+    else g('authScreen').classList.add('on');
+  } catch(err){
+    showLoading(false);
+    showToast('Firebase connection error. Check internet.');
+    g('authScreen').classList.add('on');
+    console.error(err);
+  }
+}
+
+// ── BIND PW TOGGLES ──
+function bindPw(btnId, inpId){
+  var b=g(btnId); if(!b) return;
+  b.addEventListener('click', function(){
+    var i=g(inpId); i.type = i.type==='password'?'text':'password';
+    this.innerHTML = i.type==='password'?'&#128065;':'&#128584;';
+  });
+}
+bindPw('lPwT','lPass'); bindPw('rPwT','rPass'); bindPw('rPwT2','rPass2');
+bindPw('fpPwT','fpNewPass'); bindPw('fpPwT2','fpNewPass2');
+bindPw('rpCurT','rpCurrent'); bindPw('rpNewT','rpNew'); bindPw('rpNew2T','rpNew2');
+
+// ── AUTH TABS ──
+g('tabLogin').addEventListener('click', ()=>switchAuthTab('login'));
+g('tabReg').addEventListener('click',   ()=>switchAuthTab('register'));
+
+function switchAuthTab(tab){
+  g('tabLogin').classList.toggle('on', tab==='login');
+  g('tabReg').classList.toggle('on',   tab==='register');
+  g('loginForm').classList.toggle('on', tab==='login');
+  g('regForm').classList.toggle('on',   tab==='register');
+  g('forgotForm').classList.remove('on');
+}
+
+// ── LOGIN ──
+g('loginBtn').addEventListener('click', doLogin);
+g('lPass').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+
+async function doLogin(){
+  const u=v('lUser'), p=g('lPass').value;
+  hideEl('lErr');
+  if(!u||!p){ showEl('lErr','Please enter username and password.'); return; }
+  showLoading(true);
+  try {
+    sysUsers = await fbGetAllUsers();
+    const found = sysUsers.find(x => x.username===u && x.password===p);
+    showLoading(false);
+    if(!found){ showEl('lErr','Invalid username or password.'); return; }
+    session = {username:found.username, role:found.role, name:found.name};
+    session.ver = SESSION_VER; localStorage.setItem('sms_session', JSON.stringify(session));
+    launchApp();
+  } catch(err){
+    showLoading(false);
+    showEl('lErr','Connection error. Check internet.');
+  }
+}
+
+// ── REGISTER ──
+g('regBtn').addEventListener('click', doRegister);
+
+async function doRegister(){
+  const name=v('rName'), uname=v('rUser'), pass=g('rPass').value, pass2=g('rPass2').value;
+  const secQ=v('rSecQ'), secA=v('rSecA');
+  hideEl('rErr'); g('rOk').style.display='none';
+  if(!name||!uname||!pass){ showEl('rErr','Name, username and password are required.'); return; }
+  if(!secQ||!secA){ showEl('rErr','Please select a security question and enter your answer.'); return; }
+  if(pass.length<6){ showEl('rErr','Password must be at least 6 characters.'); return; }
+  if(pass!==pass2){ showEl('rErr','Passwords do not match.'); return; }
+  showLoading(true);
+  try {
+    sysUsers = await fbGetAllUsers();
+    if(sysUsers.find(u=>u.username===uname)){ showLoading(false); showEl('rErr','Username already taken.'); return; }
+    const newUser = {
+      username:uname, password:pass, role:'user', name, email:v('rEmail'),
+      contact:v('rContact'), dept:v('rDept'), desig:v('rDesig'),
+      secQ, secA:secA.toLowerCase(), registeredOn:new Date().toISOString()
+    };
+    await fbSetUser(newUser);
+    sysUsers.push(newUser);
+    showLoading(false);
+    showEl('rOk','Account created successfully! You can now login.');
+    ['rName','rUser','rEmail','rContact','rDept','rDesig','rSecA'].forEach(id=>sv(id,''));
+    g('rPass').value=''; g('rPass2').value=''; g('rSecQ').value='';
+    setTimeout(()=>switchAuthTab('login'), 2000);
+  } catch(err){
+    showLoading(false); showEl('rErr','Connection error. Try again.');
+  }
+}
+
+// ── LOGOUT ──
+g('logoutBtn').addEventListener('click', doLogout);
+function doLogout(){
+  session=null; localStorage.removeItem('sms_session'); currentEmp=null;
+  g('authScreen').classList.add('on'); g('appShell').classList.remove('on');
+  sv('lUser',''); g('lPass').value=''; hideEl('lErr'); switchAuthTab('login');
+}
+
+// ── FORGOT PASSWORD ──
+let fpUsername='';
+g('forgotBtn').addEventListener('click', ()=>{
+  g('loginForm').classList.remove('on'); g('regForm').classList.remove('on');
+  g('forgotForm').classList.add('on'); g('tabLogin').classList.remove('on'); g('tabReg').classList.remove('on');
+  hideEl('fpErr'); hideEl('fpOk');
+  g('fpStep1').classList.add('on'); g('fpStep2').classList.remove('on'); g('fpStep3').classList.remove('on');
+  sv('fpUser',''); sv('fpAnswer',''); g('fpNewPass').value=''; g('fpNewPass2').value=''; fpUsername='';
+});
+g('backToLoginBtn').addEventListener('click', ()=>{ g('forgotForm').classList.remove('on'); switchAuthTab('login'); });
+
+g('fpNextBtn').addEventListener('click', async ()=>{
+  const u=v('fpUser'); hideEl('fpErr'); hideEl('fpOk');
+  if(!u){ showEl('fpErr','Please enter your username.'); return; }
+  showLoading(true);
+  try {
+    sysUsers = await fbGetAllUsers();
+    const found = sysUsers.find(x=>x.username===u);
+    showLoading(false);
+    if(!found){ showEl('fpErr','Username not found.'); return; }
+    if(!found.secQ){ showEl('fpErr','No security question set. Contact Admin.'); return; }
+    fpUsername=u; sv('fpQuestion', found.secQ); sv('fpAnswer','');
+    g('fpStep1').classList.remove('on'); g('fpStep2').classList.add('on');
+  } catch(err){ showLoading(false); showEl('fpErr','Connection error. Try again.'); }
+});
+
+g('fpVerifyBtn').addEventListener('click', ()=>{
+  const ans=v('fpAnswer'); hideEl('fpErr'); hideEl('fpOk');
+  if(!ans){ showEl('fpErr','Please enter your answer.'); return; }
+  const found=sysUsers.find(x=>x.username===fpUsername);
+  if(!found){ showEl('fpErr','User not found.'); return; }
+  if((found.secA||'').toLowerCase()!==ans.toLowerCase()){ showEl('fpErr','Wrong answer. Try again.'); return; }
+  g('fpStep2').classList.remove('on'); g('fpStep3').classList.add('on');
+});
+
+g('fpSaveBtn').addEventListener('click', async ()=>{
+  const p=g('fpNewPass').value, p2=g('fpNewPass2').value;
+  hideEl('fpErr'); hideEl('fpOk');
+  if(!p){ showEl('fpErr','Please enter a new password.'); return; }
+  if(p.length<6){ showEl('fpErr','Min 6 characters.'); return; }
+  if(p!==p2){ showEl('fpErr','Passwords do not match.'); return; }
+  showLoading(true);
+  try {
+    const found=sysUsers.find(x=>x.username===fpUsername);
+    if(!found){ showLoading(false); showEl('fpErr','User not found.'); return; }
+    found.password=p; await fbSetUser(found);
+    showLoading(false); fpUsername='';
+    showEl('fpOk','Password reset! You can now login.');
+    setTimeout(()=>{ g('forgotForm').classList.remove('on'); switchAuthTab('login'); }, 2500);
+  } catch(err){ showLoading(false); showEl('fpErr','Error saving. Try again.'); }
+});
+
+// ── LAUNCH APP ──
+async function launchApp(){
+  g('authScreen').classList.remove('on'); g('appShell').classList.add('on');
+  const av=g('hdrAv'); av.textContent=session.name.charAt(0).toUpperCase(); av.className='uav '+session.role;
+  g('hdrNm').textContent=session.name;
+  const rb=g('hdrRb'); rb.textContent=isAdmin()?'Admin':'User'; rb.className='urb '+session.role;
+  g('adminNav').classList.toggle('on', isAdmin());
+  g('addEmpBtn').style.display=isAdmin()?'inline-flex':'none';
+  g('backBtn').style.display='none'; currentEmp=null;
+  if(isAdmin()){ g('tabMaster').classList.add('on'); g('tabUsers').classList.remove('on'); }
+  showLoading(true);
+  employees = await fbGetAllEmps();
+  showLoading(false);
+  showPage('pgMaster'); renderMaster();
+
+  // Real-time sync for employees
+  onSnapshot(collection(db, EMP_COL), snap=>{
+    employees = snap.docs.map(d=>d.data());
+    renderMaster();
+  });
+}
+
+// ── NAVIGATION ──
+g('backBtn').addEventListener('click', showMaster);
+g('tabMaster').addEventListener('click', ()=>navSwitch('master'));
+g('tabUsers').addEventListener('click',  ()=>navSwitch('users'));
+
+function navSwitch(tab){
+  g('tabMaster').classList.toggle('on', tab==='master');
+  g('tabUsers').classList.toggle('on',  tab==='users');
+  showPage(tab==='master'?'pgMaster':'pgUsers');
+  if(tab==='users') renderUsers();
+  g('backBtn').style.display='none'; currentEmp=null;
+}
+function showMaster(){
+  showPage('pgMaster');
+  g('backBtn').style.display='none';
+  if(isAdmin()){ g('tabMaster').classList.add('on'); g('tabUsers').classList.remove('on'); }
+  currentEmp=null;
+}
+
+// ── MASTER SHEET ──
+g('masterSearch').addEventListener('input', renderMaster);
+
+function renderMaster(){
+  const q=(g('masterSearch').value||'').toLowerCase();
+  const tbody=g('masterTbody');
+  const list=employees.filter(e=>e.name.toLowerCase().includes(q)||e.idno.toLowerCase().includes(q)||(e.trade||'').toLowerCase().includes(q));
+  if(!list.length){
+    tbody.innerHTML='<tr><td colspan="5" class="norow">'+(employees.length===0?'No employees yet. Admin can add employees.':'No results.')+'</td></tr>'; return;
+  }
+  tbody.innerHTML=list.map((e,i)=>{
+    const ab=isAdmin()?`<button class="ebtn" data-editid="${e.idno}">&#9998; Edit</button><button class="dbtn" data-delid="${e.idno}">&#128465; Delete</button>`:'';
+    return `<tr><td>${i+1}</td><td><div class="enm">${e.name}</div><span class="eid">${e.idno}</span></td><td>${e.trade||'&mdash;'}</td><td>${e.idno}</td><td><div class="abts"><button class="vbtn" data-viewid="${e.idno}">&#128203; View Form</button>${ab}</div></td></tr>`;
+  }).join('');
+  tbody.querySelectorAll('[data-viewid]').forEach(b=>b.addEventListener('click',()=>openForm(b.dataset.viewid)));
+  tbody.querySelectorAll('[data-editid]').forEach(b=>b.addEventListener('click',()=>openEditEmpModal(b.dataset.editid)));
+  tbody.querySelectorAll('[data-delid]').forEach(b=>b.addEventListener('click',()=>deleteEmp(b.dataset.delid)));
+}
+
+async function deleteEmp(idno){
+  if(!isAdmin()) return;
+  if(!confirm('Delete this employee and all their records?')) return;
+  showSync(true);
+  try {
+    await fbDeleteEmp(idno); await fbDeleteIssues(idno);
+    employees=employees.filter(e=>e.idno!==idno); delete issueData[idno];
+    showSync(false); renderMaster(); showToast('Employee deleted.');
+  } catch(err){ showSync(false); showToast('Error deleting. Try again.'); }
+}
+
+// ── ADD EMPLOYEE ──
+g('addEmpBtn').addEventListener('click', ()=>{ if(!isAdmin()) return; hideEl('aErr'); openModal('moAdd'); setTimeout(()=>g('aName').focus(),80); });
+g('moAddCl').addEventListener('click', ()=>closeModal('moAdd'));
+g('moAddCl2').addEventListener('click', ()=>closeModal('moAdd'));
+g('moAdd').addEventListener('click', e=>{ if(e.target===g('moAdd')) closeModal('moAdd'); });
+
+g('saveEmpBtn').addEventListener('click', async ()=>{
+  if(!isAdmin()) return;
+  const name=v('aName'), trade=v('aTrade'), idno=v('aIdno');
+  hideEl('aErr');
+  if(!name||!trade||!idno){ showEl('aErr','Name, Trade and ID are required.'); return; }
+  if(employees.find(e=>e.idno===idno)){ showEl('aErr','Employee with this ID already exists.'); return; }
+  const emp={name,trade,idno,nationality:v('aNation'),dept:v('aDept'),contact:v('aContact'),doj:g('aDoj').value,status:g('aStatus').value};
+  showSync(true);
+  try {
+    await fbSetEmp(emp); employees.push(emp);
+    showSync(false); renderMaster(); closeModal('moAdd');
+    ['aName','aTrade','aIdno','aNation','aDept','aContact','aDoj'].forEach(id=>sv(id,''));
+    g('aStatus').value='Active'; showToast(`"${name}" added!`);
+  } catch(err){ showSync(false); showEl('aErr','Error saving. Try again.'); }
+});
+
+// ── EDIT EMPLOYEE ──
+g('moEditCl').addEventListener('click', ()=>closeModal('moEdit'));
+g('moEditCl2').addEventListener('click', ()=>closeModal('moEdit'));
+g('moEdit').addEventListener('click', e=>{ if(e.target===g('moEdit')) closeModal('moEdit'); });
+
+function openEditEmpModal(idno){
+  if(!isAdmin()) return;
+  const emp=employees.find(e=>e.idno===idno); if(!emp) return;
+  sv('eOrig',idno); sv('eName',emp.name); sv('eTrade',emp.trade||'');
+  sv('eIdno',emp.idno); sv('eNation',emp.nationality||''); sv('eDept',emp.dept||'');
+  sv('eContact',emp.contact||''); sv('eDoj',emp.doj||'');
+  g('eStatus').value=emp.status||'Active'; hideEl('eErr'); openModal('moEdit');
+}
+
+g('saveEditBtn').addEventListener('click', async ()=>{
+  if(!isAdmin()) return;
+  const origId=v('eOrig'), name=v('eName'), trade=v('eTrade'), idno=v('eIdno');
+  hideEl('eErr');
+  if(!name||!trade||!idno){ showEl('eErr','Name, Trade and ID are required.'); return; }
+  if(idno!==origId && employees.find(e=>e.idno===idno)){ showEl('eErr','Another employee with this ID exists.'); return; }
+  const emp=employees.find(e=>e.idno===origId); if(!emp) return;
+  showSync(true);
+  try {
+    if(idno!==origId){
+      const rows=await fbGetIssues(origId);
+      await fbSetIssues(idno, rows); await fbDeleteIssues(origId); await fbDeleteEmp(origId);
+    }
+    const updated={...emp, name, trade, idno, nationality:v('eNation'), dept:v('eDept'), contact:v('eContact'), doj:g('eDoj').value, status:g('eStatus').value};
+    await fbSetEmp(updated);
+    const idx=employees.findIndex(e=>e.idno===origId);
+    employees[idx]=updated;
+    showSync(false); renderMaster(); closeModal('moEdit'); showToast(`"${name}" updated!`);
+  } catch(err){ showSync(false); showEl('eErr','Error saving. Try again.'); }
+});
+
+// ── EMPLOYEE FORM ──
+async function openForm(idno){
+  const emp=employees.find(e=>e.idno===idno); if(!emp) return;
+  currentEmp=emp;
+  g('fName').textContent=emp.name.toUpperCase();
+  g('fIdno').textContent=emp.idno;
+  g('fTrade').textContent=(emp.trade||'').toUpperCase();
+  g('newRowBtn').style.display=isAdmin()?'inline-flex':'none';
+  g('readonlyBar').style.display=isAdmin()?'none':'block';
+  g('actColHd').textContent=isAdmin()?'Actions':'';
+  g('backBtn').style.display='flex';
+  showLoading(true);
+  issueData[idno] = await fbGetIssues(idno);
+  showLoading(false);
+  renderIssueTable(); showPage('pgForm'); window.scrollTo(0,0);
+
+  // Real-time sync for this employee's issues
+  onSnapshot(doc(db, ISSUES_COL, idno), snap=>{
+    if(snap.exists() && currentEmp && currentEmp.idno===idno){
+      issueData[idno] = snap.data().rows || [];
+      renderIssueTable();
+    }
+  });
+}
+
+g('newRowBtn').addEventListener('click', async ()=>{
+  if(!isAdmin()||!currentEmp) return;
+  const rows=getRows(); rows.push({date:new Date().toISOString().slice(0,10)});
+  await saveRows(rows); renderIssueTable();
+  setTimeout(()=>{ const l=document.querySelector('#issueTbody tr:last-child'); if(l) l.scrollIntoView({behavior:'smooth',block:'nearest'}); },80);
+  showToast('New row added.');
+});
+g('printBtn').addEventListener('click', ()=>window.print());
+
+function getRows(){ return currentEmp?(issueData[currentEmp.idno]||[]):[]; }
+async function saveRows(rows){
+  if(!currentEmp) return;
+  issueData[currentEmp.idno]=rows;
+  showSync(true);
+  try { await fbSetIssues(currentEmp.idno, rows); } catch(e){ showToast('Sync error.'); }
+  showSync(false);
+}
+
+function renderIssueTable(){
+  const rows=getRows(), admin=isAdmin(), count=Math.max(19,rows.length+3);
+  let html='';
+  for(let i=0;i<count;i++){
+    const r=rows[i]||{};
+    const cells=FIELDS.map(f=>{
+      const val=(r[f]||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+      const t=f==='date'?'date':'text';
+      if(admin) return `<td><input class="ecell" type="${t}" value="${val}" data-row="${i}" data-field="${f}"></td>`;
+      else       return `<td><input class="ecell" type="${t}" value="${val}" disabled></td>`;
+    }).join('');
+    const act=admin?`<td class="no-print"><div class="racell"><button class="rebtn" data-erow="${i}">&#9998;</button><button class="rdbtn" data-drow="${i}">&#x2715;</button></div></td>`:`<td class="no-print"></td>`;
+    html+=`<tr><td class="sln">${i+1}</td>${cells}${act}</tr>`;
+  }
+  const tb=g('issueTbody'); tb.innerHTML=html;
+  tb.querySelectorAll('.ecell:not([disabled])').forEach(inp=>{
+    inp.addEventListener('change', async function(){
+      const idx=parseInt(this.dataset.row), field=this.dataset.field;
+      const rows2=getRows(); while(rows2.length<=idx) rows2.push({});
+      rows2[idx][field]=this.value; await saveRows(rows2);
+    });
+  });
+  tb.querySelectorAll('[data-erow]').forEach(b=>b.addEventListener('click',()=>openEditRowModal(parseInt(b.dataset.erow))));
+  tb.querySelectorAll('[data-drow]').forEach(b=>b.addEventListener('click', async ()=>{
+    const idx=parseInt(b.dataset.drow), rows2=getRows();
+    if(rows2[idx]&&Object.values(rows2[idx]).some(v=>v)){ if(!confirm('Delete this row?')) return; }
+    rows2.splice(idx,1); await saveRows(rows2); renderIssueTable();
+  }));
+}
+
+// ── EDIT ROW MODAL ──
+g('moRowCl').addEventListener('click', ()=>closeModal('moRow'));
+g('moRowCl2').addEventListener('click', ()=>closeModal('moRow'));
+g('moRow').addEventListener('click', e=>{ if(e.target===g('moRow')) closeModal('moRow'); });
+
+function openEditRowModal(idx){
+  if(!isAdmin()) return;
+  const rows=getRows(), r=rows[idx]||{};
+  sv('erIdx',idx); g('erRowNum').textContent=idx+1;
+  g('erDate').value=r.date||'';
+  sv('erCoverall',r.coverall||''); sv('erShoes',r.shoes||''); sv('erHelmet',r.helmet||'');
+  sv('erSglass',r.sglass||''); sv('erSjacket',r.sjacket||''); sv('erToolsGiven',r.toolsgiven||'');
+  sv('erToolsRet',r.toolsret||''); sv('erEmpSign',r.empsign||''); sv('erIssuedBy',r.issuedby||'');
+  openModal('moRow');
+}
+
+g('saveRowBtn').addEventListener('click', async ()=>{
+  if(!isAdmin()) return;
+  const idx=parseInt(v('erIdx')), rows=getRows();
+  while(rows.length<=idx) rows.push({});
+  rows[idx]={date:g('erDate').value,coverall:v('erCoverall'),shoes:v('erShoes'),helmet:v('erHelmet'),sglass:v('erSglass'),sjacket:v('erSjacket'),toolsgiven:v('erToolsGiven'),toolsret:v('erToolsRet'),empsign:v('erEmpSign'),issuedby:v('erIssuedBy')};
+  await saveRows(rows); renderIssueTable(); closeModal('moRow'); showToast('Row updated!');
+});
+
+// ── RESET PASSWORD ──
+g('userPill').addEventListener('click', ()=>{
+  hideEl('rpErr'); hideEl('rpOk');
+  g('rpCurrent').value=''; g('rpNew').value=''; g('rpNew2').value='';
+  openModal('moResetPw');
+});
+g('moResetCl').addEventListener('click', ()=>closeModal('moResetPw'));
+g('moResetCl2').addEventListener('click', ()=>closeModal('moResetPw'));
+g('moResetPw').addEventListener('click', e=>{ if(e.target===g('moResetPw')) closeModal('moResetPw'); });
+
+g('saveResetBtn').addEventListener('click', async ()=>{
+  const cur=g('rpCurrent').value, np=g('rpNew').value, np2=g('rpNew2').value;
+  hideEl('rpErr'); hideEl('rpOk');
+  if(!cur||!np||!np2){ showEl('rpErr','All fields are required.'); return; }
+  const user=sysUsers.find(u=>u.username===session.username);
+  if(!user){ showEl('rpErr','User not found.'); return; }
+  if(user.password!==cur){ showEl('rpErr','Current password is incorrect.'); return; }
+  if(np.length<6){ showEl('rpErr','Min 6 characters.'); return; }
+  if(np!==np2){ showEl('rpErr','Passwords do not match.'); return; }
+  showSync(true);
+  try {
+    user.password=np; await fbSetUser(user);
+    showSync(false); showEl('rpOk','Password updated successfully!');
+    g('rpCurrent').value=''; g('rpNew').value=''; g('rpNew2').value='';
+    showToast('Password changed!'); setTimeout(()=>closeModal('moResetPw'),1800);
+  } catch(err){ showSync(false); showEl('rpErr','Error saving. Try again.'); }
+});
+
+// ── REGISTERED USERS ──
+g('userSearch').addEventListener('input', renderUsers);
+async function renderUsers(){
+  if(!isAdmin()) return;
+  showLoading(true);
+  sysUsers = await fbGetAllUsers();
+  showLoading(false);
+  const q=(g('userSearch').value||'').toLowerCase();
+  const list=sysUsers.filter(u=>u.name.toLowerCase().includes(q)||u.username.toLowerCase().includes(q)||(u.email||'').toLowerCase().includes(q));
+  const tbody=g('usersTbody');
+  if(!list.length){ tbody.innerHTML='<tr><td colspan="10" class="norow">No users found.</td></tr>'; return; }
+  tbody.innerHTML=list.map((u,i)=>{
+    const dt=u.registeredOn?new Date(u.registeredOn).toLocaleDateString('en-GB'):'&mdash;';
+    const rb=u.role==='admin'?'<span class="urb admin">Admin</span>':'<span class="urb user">User</span>';
+    const del=u.username!=='admin'?`<button class="dbtn" data-delusr="${u.username}">&#128465; Delete</button>`:'<span style="color:#bbb;font-size:11px">Protected</span>';
+    return `<tr><td>${i+1}</td><td><strong>${u.name}</strong></td><td><span class="eid">${u.username}</span></td><td>${u.email||'&mdash;'}</td><td>${u.contact||'&mdash;'}</td><td>${u.dept||'&mdash;'}</td><td>${u.desig||'&mdash;'}</td><td>${rb}</td><td>${dt}</td><td>${del}</td></tr>`;
+  }).join('');
+  tbody.querySelectorAll('[data-delusr]').forEach(b=>b.addEventListener('click', async ()=>{
+    if(!confirm(`Delete user "${b.dataset.delusr}"?`)) return;
+    showSync(true);
+    try { await fbDeleteUser(b.dataset.delusr); sysUsers=sysUsers.filter(u=>u.
