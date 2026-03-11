@@ -3,595 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Safety Management System – Petrotechnic</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Safety Management System</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:#f4f5f7;color:#1a1a1a;min-height:100vh;}
-
-/* ── APP HEADER ── */
-.app-header{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
-.app-logo{width:40px;height:40px;background:#1a1a1a;border-radius:10px;display:grid;place-items:center;flex-shrink:0;}
-.app-logo svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;}
-.app-title{font-size:17px;font-weight:700;color:#1a1a1a;}
-.back-btn{margin-left:auto;display:none;align-items:center;gap:6px;background:none;border:none;cursor:pointer;color:#555;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:7px 14px;border-radius:8px;transition:background .15s;}
-.back-btn:hover{background:#f0f0f0;}
-.back-btn svg{width:16px;height:16px;}
-
-/* ── PAGES ── */
-.page{display:none;padding:20px;max-width:900px;margin:0 auto;}
-.page.active{display:block;}
-
-/* ── MASTER SHEET ── */
-.master-top{margin-bottom:22px;}
-.master-top h2{font-size:26px;font-weight:700;margin-bottom:4px;}
-.master-top p{color:#6b7280;font-size:14px;}
-.add-emp-btn{margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:#1a1a1a;color:#fff;border:none;border-radius:10px;padding:12px 22px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s;}
-.add-emp-btn:hover{background:#333;}
-.add-emp-btn svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.5;}
-
-.emp-list-card{background:#fff;border-radius:14px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;}
-.search-row{padding:14px 18px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;}
-.search-row svg{width:18px;height:18px;color:#aaa;flex-shrink:0;}
-.search-row input{border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:15px;width:100%;color:#1a1a1a;background:none;}
-.search-row input::placeholder{color:#bbb;}
-
-.emp-table{width:100%;border-collapse:collapse;}
-.emp-table th{padding:10px 18px;text-align:left;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#9ca3af;border-bottom:1px solid #f0f0f0;}
-.emp-table td{padding:16px 18px;border-bottom:1px solid #f5f5f5;font-size:14px;vertical-align:top;}
-.emp-table tr:last-child td{border-bottom:none;}
-.emp-table tr:hover td{background:#fafafa;}
-.emp-name{font-weight:700;font-size:15px;line-height:1.3;margin-bottom:2px;}
-.emp-id-badge{display:inline-block;background:#f3f4f6;color:#374151;border-radius:5px;padding:2px 8px;font-size:12px;font-family:'DM Mono',monospace;}
-.view-form-btn{display:inline-flex;align-items:center;gap:5px;background:#f0f9ff;color:#0369a1;border:1px solid #bae6fd;border-radius:7px;padding:6px 13px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
-.view-form-btn:hover{background:#0369a1;color:#fff;border-color:#0369a1;}
-.edit-btn{display:inline-flex;align-items:center;gap:4px;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:7px;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer;margin-left:6px;font-family:'DM Sans',sans-serif;transition:all .15s;}
-.edit-btn:hover{background:#16a34a;color:#fff;border-color:#16a34a;}
-.del-btn{display:inline-flex;align-items:center;gap:4px;background:#fff0f0;color:#dc2626;border:1px solid #fecaca;border-radius:7px;padding:6px 11px;font-size:12px;font-weight:600;cursor:pointer;margin-left:6px;font-family:'DM Sans',sans-serif;transition:all .15s;}
-.del-btn:hover{background:#dc2626;color:#fff;border-color:#dc2626;}
-.action-btns{display:flex;gap:0;flex-wrap:wrap;gap:4px;}
-.no-emp{text-align:center;padding:40px;color:#9ca3af;font-size:15px;}
-
-/* ── ADD EMPLOYEE MODAL ── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:16px;}
-.modal-overlay.open{display:flex;}
-.modal{background:#fff;border-radius:16px;width:100%;max-width:520px;padding:28px;position:relative;max-height:90vh;overflow-y:auto;}
-.modal h3{font-size:20px;font-weight:700;margin-bottom:20px;}
-.modal-close{position:absolute;top:16px;right:16px;background:#f3f4f6;border:none;border-radius:7px;width:32px;height:32px;cursor:pointer;font-size:18px;display:grid;place-items:center;color:#555;}
-.modal-close:hover{background:#e5e7eb;}
-.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
-.fg label{font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#6b7280;}
-.fg input,.fg select{border:1.5px solid #e5e7eb;border-radius:8px;padding:10px 13px;font-family:'DM Sans',sans-serif;font-size:14px;color:#1a1a1a;transition:border .15s;outline:none;}
+body{font-family:sans-serif;background:#f4f5f7;color:#1a1a1a;min-height:100vh;font-size:14px;}
+#authScreen{display:none;min-height:100vh;background:linear-gradient(135deg,#0f172a,#1e293b);align-items:center;justify-content:center;padding:16px;}
+#authScreen.on{display:flex;}
+.acard{background:#fff;border-radius:18px;width:100%;max-width:430px;padding:32px 28px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.alogo{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.alogo-icon{width:42px;height:42px;background:#1a1a1a;border-radius:11px;display:grid;place-items:center;flex-shrink:0;}
+.alogo-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;}
+.alogo h1{font-size:15px;font-weight:700;line-height:1.3;}
+.alogo p{font-size:11px;color:#6b7280;}
+.atabs{display:flex;background:#f3f4f6;border-radius:10px;padding:4px;margin-bottom:22px;gap:3px;}
+.atab{flex:1;padding:9px;text-align:center;border:none;background:none;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;color:#6b7280;transition:all .2s;}
+.atab.on{background:#fff;color:#1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,.1);}
+.aform{display:none;} .aform.on{display:block;}
+.aform h2{font-size:21px;font-weight:700;margin-bottom:3px;}
+.aform .sub{color:#6b7280;font-size:13px;margin-bottom:18px;}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.fg label{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6b7280;}
+.fg input,.fg select{border:1.5px solid #e5e7eb;border-radius:8px;padding:10px 12px;font-size:14px;color:#1a1a1a;outline:none;transition:border .15s;width:100%;}
 .fg input:focus,.fg select:focus{border-color:#1a1a1a;}
-.fg select option{background:#fff;}
-.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;}
-.modal-btns{display:flex;gap:10px;margin-top:20px;}
-.btn-black{background:#1a1a1a;color:#fff;border:none;border-radius:9px;padding:11px 22px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s;}
-.btn-black:hover{background:#333;}
-.btn-ghost{background:#f3f4f6;color:#374151;border:none;border-radius:9px;padding:11px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;}
-.btn-ghost:hover{background:#e5e7eb;}
-
-/* ── EMPLOYEE FORM PAGE ── */
-.form-page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
-.form-page-header h2{font-size:22px;font-weight:700;}
-.header-btns{display:flex;gap:10px;}
-.new-entry-btn{display:inline-flex;align-items:center;gap:7px;background:#1a1a1a;color:#fff;border:none;border-radius:9px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;}
-.new-entry-btn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.5;}
-.print-btn{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#374151;border:1.5px solid #e5e7eb;border-radius:9px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;}
-.print-btn svg{width:16px;height:16px;}
-.print-btn:hover{border-color:#999;}
-
-/* ── OFFICIAL FORM ── */
-.official-form{background:#fff;border:1px solid #d1d5db;border-radius:6px;padding:28px;font-family:'DM Sans',sans-serif;}
-.form-company-name{text-align:center;font-size:17px;font-weight:800;letter-spacing:.5px;margin-bottom:4px;text-transform:uppercase;}
-.form-title{text-align:center;font-size:14px;font-weight:700;text-transform:uppercase;margin-bottom:18px;}
-.form-divider{border:none;border-top:2px solid #1a1a1a;margin:0 0 16px;}
-
-.form-info-table{width:100%;border-collapse:collapse;border:1px solid #374151;margin-bottom:20px;}
-.form-info-table td{padding:9px 14px;font-size:14px;border:1px solid #374151;}
-.form-info-table .lbl{font-weight:700;width:90px;}
-.form-info-table .val{font-weight:600;}
-
-/* DATA TABLE */
-.data-table-wrap{overflow-x:auto;}
-.data-table{width:100%;border-collapse:collapse;border:1px solid #374151;font-size:12px;}
-.data-table th{background:#f9fafb;border:1px solid #374151;padding:8px 6px;text-align:center;font-weight:700;font-size:11px;text-transform:uppercase;white-space:nowrap;}
-.data-table td{border:1px solid #d1d5db;padding:0;}
-.data-table td.slno{text-align:center;color:#9ca3af;font-size:12px;padding:6px 4px;background:#fafafa;}
-.editable-cell{width:100%;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:12px;padding:7px 6px;text-align:center;background:transparent;color:#1a1a1a;}
-.editable-cell:focus{background:#fffbeb;}
-.data-table tr:hover td{background:#fffbeb;}
-.data-table tr:hover td.slno{background:#f3f4f6;}
-.del-row-btn{background:none;border:none;cursor:pointer;color:#fca5a5;font-size:14px;padding:4px 8px;display:block;width:100%;transition:color .15s;}
-.del-row-btn:hover{color:#dc2626;}
-
-/* ── ALERT ── */
-.toast{position:fixed;bottom:24px;right:24px;background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:500;z-index:999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;}
-.toast.show{opacity:1;transform:translateY(0);}
-
-/* ── PRINT ── */
-@media print{
-  .app-header,.form-page-header,.no-print{display:none!important;}
-  body{background:#fff;}
-  .official-form{border:none;padding:10px;}
-  .del-row-btn{display:none!important;}
-  .editable-cell{border:none;background:transparent!important;}
-}
-
-/* ── RESPONSIVE ── */
-@media(max-width:600px){
-  .form-2col{grid-template-columns:1fr;}
-  .emp-table th:nth-child(4),.emp-table td:nth-child(4){display:none;}
-}
+.pww{position:relative;} .pww input{padding-right:38px;}
+.pwt{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:15px;padding:0;}
+.abtn{width:100%;background:#1a1a1a;color:#fff;border:none;border-radius:9px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;transition:background .15s;}
+.abtn:hover{background:#333;}
+.aerr{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:7px;padding:8px 12px;font-size:13px;margin-bottom:12px;display:none;}
+.aok{background:#f0fdf4;border:1px solid #bbf7d0;color:#16a34a;border-radius:7px;padding:8px 12px;font-size:13px;margin-bottom:12px;display:none;}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;}
+.flink{text-align:right;margin-top:6px;margin-bottom:2px;}
+.flink button{background:none;border:none;cursor:pointer;color:#0369a1;font-size:13px;font-weight:600;padding:0;text-decoration:underline;}
+#appShell{display:none;} #appShell.on{display:block;}
+.hdr{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 18px;display:flex;align-items:center;gap:11px;position:sticky;top:0;z-index:100;height:56px;}
+.hdr-logo{width:33px;height:33px;background:#1a1a1a;border-radius:8px;display:grid;place-items:center;}
+.hdr-logo svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;}
+.hdr-title{font-size:15px;font-weight:700;}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:7px;}
+#backBtn{display:none;align-items:center;gap:5px;background:none;border:none;cursor:pointer;color:#555;font-size:13px;font-weight:500;padding:6px 11px;border-radius:7px;}
+#backBtn:hover{background:#f0f0f0;}
+.upill{display:flex;align-items:center;gap:6px;background:#f3f4f6;border-radius:30px;padding:3px 11px 3px 3px;cursor:pointer;}
+.upill:hover{background:#e9eaec;}
+.uav{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;}
+.uav.admin{background:#dc2626;} .uav.user{background:#0369a1;}
+.unm{font-size:13px;font-weight:600;}
+.urb{font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;padding:2px 6px;border-radius:20px;}
+.urb.admin{background:#fef2f2;color:#dc2626;} .urb.user{background:#f0f9ff;color:#0369a1;}
+.logoutbtn{background:none;border:1px solid #e5e7eb;border-radius:7px;padding:5px 11px;font-size:12px;font-weight:600;cursor:pointer;color:#374151;}
+.logoutbtn:hover{background:#f3f4f6;}
+#adminNav{background:#fff;border-bottom:1px solid #e5e7eb;display:none;padding:0 18px;}
+#adminNav.on{display:flex;}
+.ntab{padding:11px 15px;border:none;background:none;font-size:13px;font-weight:600;cursor:pointer;color:#6b7280;border-bottom:2px solid transparent;transition:all .2s;}
+.ntab.on{color:#1a1a1a;border-bottom-color:#1a1a1a;}
+.pg{display:none;padding:18px;max-width:960px;margin:0 auto;} .pg.on{display:block;}
+.mtop{margin-bottom:18px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.mtop h2{font-size:23px;font-weight:700;margin-bottom:3px;} .mtop p{color:#6b7280;font-size:13px;}
+#addEmpBtn{display:none;align-items:center;gap:6px;background:#1a1a1a;color:#fff;border:none;border-radius:9px;padding:10px 17px;font-size:13px;font-weight:600;cursor:pointer;}
+#addEmpBtn:hover{background:#333;}
+.lcard{background:#fff;border-radius:13px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;}
+.srow{padding:11px 15px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:8px;}
+.srow svg{width:16px;height:16px;flex-shrink:0;color:#bbb;}
+.srow input{border:none;outline:none;font-size:14px;width:100%;background:none;color:#1a1a1a;}
+.srow input::placeholder{color:#bbb;}
+.etbl{width:100%;border-collapse:collapse;}
+.etbl th{padding:8px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;border-bottom:1px solid #f0f0f0;}
+.etbl td{padding:12px 14px;border-bottom:1px solid #f5f5f5;font-size:13px;vertical-align:middle;}
+.etbl tr:last-child td{border-bottom:none;} .etbl tr:hover td{background:#fafafa;}
+.enm{font-weight:700;font-size:14px;margin-bottom:2px;}
+.eid{display:inline-block;background:#f3f4f6;color:#374151;border-radius:4px;padding:1px 6px;font-size:11px;font-family:monospace;}
+.abts{display:flex;gap:4px;flex-wrap:wrap;}
+.vbtn{display:inline-flex;align-items:center;gap:3px;background:#f0f9ff;color:#0369a1;border:1px solid #bae6fd;border-radius:6px;padding:5px 9px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.vbtn:hover{background:#0369a1;color:#fff;}
+.ebtn{display:inline-flex;align-items:center;gap:3px;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:6px;padding:5px 9px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.ebtn:hover{background:#16a34a;color:#fff;}
+.dbtn{display:inline-flex;align-items:center;gap:3px;background:#fff0f0;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:5px 9px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.dbtn:hover{background:#dc2626;color:#fff;}
+.norow{text-align:center;padding:34px;color:#9ca3af;font-size:13px;}
+.movo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:14px;}
+.movo.on{display:flex;}
+.mbox{background:#fff;border-radius:15px;width:100%;max-width:500px;padding:24px;position:relative;max-height:93vh;overflow-y:auto;}
+.mbox h3{font-size:18px;font-weight:700;margin-bottom:16px;}
+.mcl{position:absolute;top:13px;right:13px;background:#f3f4f6;border:none;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:16px;display:grid;place-items:center;color:#555;}
+.mcl:hover{background:#e5e7eb;}
+.mbtns{display:flex;gap:8px;margin-top:16px;}
+.bblack{background:#1a1a1a;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;}
+.bblack:hover{background:#333;}
+.bghost{background:#f3f4f6;color:#374151;border:none;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;cursor:pointer;}
+.bghost:hover{background:#e5e7eb;}
+.ferr{color:#dc2626;font-size:12px;margin-bottom:7px;display:none;}
+.fok{color:#16a34a;font-size:12px;margin-bottom:7px;display:none;}
+.fphdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.fphdr h2{font-size:19px;font-weight:700;}
+.fhbtns{display:flex;gap:6px;flex-wrap:wrap;}
+#newRowBtn{display:none;align-items:center;gap:5px;background:#1a1a1a;color:#fff;border:none;border-radius:7px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;}
+.prbtn{display:inline-flex;align-items:center;gap:5px;background:#fff;color:#374151;border:1.5px solid #e5e7eb;border-radius:7px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;}
+.prbtn:hover{border-color:#999;}
+#readonlyBar{background:#f0f9ff;border:1px solid #bae6fd;border-radius:7px;padding:8px 13px;font-size:13px;color:#0369a1;margin-bottom:13px;display:none;}
+.offform{background:#fff;border:1px solid #d1d5db;border-radius:5px;padding:22px;}
+.conm{text-align:center;font-size:15px;font-weight:800;text-transform:uppercase;margin-bottom:4px;}
+.cotl{text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;margin-bottom:13px;}
+.coline{border:none;border-top:2px solid #1a1a1a;margin:0 0 12px;}
+.itbl{width:100%;border-collapse:collapse;border:1px solid #374151;margin-bottom:15px;}
+.itbl td{padding:7px 11px;font-size:13px;border:1px solid #374151;}
+.itbl .lbl{font-weight:700;width:70px;}
+.dwrap{overflow-x:auto;}
+.dtbl{width:100%;border-collapse:collapse;border:1px solid #374151;font-size:11px;}
+.dtbl th{background:#f9fafb;border:1px solid #374151;padding:6px 4px;text-align:center;font-weight:700;font-size:10px;text-transform:uppercase;white-space:nowrap;}
+.dtbl td{border:1px solid #d1d5db;padding:0;}
+.dtbl td.sln{text-align:center;color:#9ca3af;font-size:10px;padding:5px 3px;background:#fafafa;width:30px;}
+.ecell{width:100%;border:none;outline:none;font-size:11px;padding:6px 4px;text-align:center;background:transparent;color:#1a1a1a;}
+.ecell:focus{background:#fffbeb;} .ecell:disabled{color:#374151;cursor:default;}
+.dtbl tr:hover td{background:#fffbeb;} .dtbl tr:hover td.sln{background:#f3f4f6;}
+.racell{display:flex;align-items:center;justify-content:center;gap:1px;}
+.rebtn{background:none;border:none;cursor:pointer;color:#93c5fd;font-size:14px;padding:3px 4px;line-height:1;}
+.rebtn:hover{color:#2563eb;}
+.rdbtn{background:none;border:none;cursor:pointer;color:#fca5a5;font-size:14px;padding:3px 4px;line-height:1;}
+.rdbtn:hover{color:#dc2626;}
+.ffoot{margin-top:20px;text-align:center;font-size:11px;color:#6b7280;}
+.pghd{font-size:21px;font-weight:700;margin-bottom:14px;}
+.utcard{background:#fff;border-radius:13px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;}
+.utbl{width:100%;border-collapse:collapse;}
+.utbl th{padding:8px 13px;text-align:left;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;border-bottom:1px solid #f0f0f0;}
+.utbl td{padding:11px 13px;border-bottom:1px solid #f5f5f5;font-size:13px;vertical-align:middle;}
+.utbl tr:last-child td{border-bottom:none;}
+.sq-step{display:none;} .sq-step.on{display:block;}
+/* LOADING OVERLAY */
+#loadingBar{position:fixed;top:0;left:0;right:0;height:3px;background:#3b82f6;z-index:9999;display:none;animation:loadpulse 1.2s ease-in-out infinite;}
+@keyframes loadpulse{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+#syncBadge{position:fixed;bottom:60px;right:20px;background:#1a1a1a;color:#fff;padding:7px 13px;border-radius:8px;font-size:12px;font-weight:500;z-index:998;display:none;align-items:center;gap:6px;}
+#syncBadge.on{display:flex;}
+#toast{position:fixed;bottom:20px;right:20px;background:#1a1a1a;color:#fff;padding:10px 16px;border-radius:9px;font-size:13px;font-weight:500;z-index:999;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;}
+#toast.on{opacity:1;transform:translateY(0);}
+@media print{.hdr,.hdr-right,#adminNav,.fphdr,#readonlyBar,.no-print,.racell{display:none!important;}body{background:#fff;}.offform{border:none;padding:4px;}.ecell{background:transparent!important;}}
+@media(max-width:560px){.f2{grid-template-columns:1fr;}.etbl th:nth-child(4),.etbl td:nth-child(4){display:none;}.acard{padding:22px 15px;}}
 </style>
 </head>
 <body>
+<div id="loadingBar"></div>
+<div id="syncBadge">&#9889; Syncing...</div>
 
-<!-- APP HEADER -->
-<div class="app-header">
-  <div class="app-logo">
-    <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg>
+<!-- AUTH SCREEN -->
+<div id="authScreen" class="on">
+<div class="acard">
+  <div class="alogo">
+    <div class="alogo-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></div>
+    <div><h1>Safety Management System</h1><p>Petrotechnic General Contracting L.L.C. SPC</p></div>
   </div>
-  <span class="app-title">Safety Management System</span>
-  <button class="back-btn" id="backBtn" onclick="showMaster()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-    Back to Master Sheet
-  </button>
+  <div class="atabs">
+    <button class="atab on" id="tabLogin">Login</button>
+    <button class="atab" id="tabReg">Register</button>
+  </div>
+  <!-- LOGIN -->
+  <div class="aform on" id="loginForm">
+    <h2>Welcome back</h2><p class="sub">Sign in to your account</p>
+    <div id="lErr" class="aerr"></div>
+    <div class="fg"><label>Username</label><input type="text" id="lUser" placeholder="Enter username" autocomplete="username"></div>
+    <div class="fg"><label>Password</label>
+      <div class="pww"><input type="password" id="lPass" placeholder="Enter password" autocomplete="current-password"><button class="pwt" id="lPwT">&#128065;</button></div>
+    </div>
+    <div class="flink"><button id="forgotBtn">Forgot Password?</button></div>
+    <button class="abtn" id="loginBtn">Sign In</button>
+  </div>
+  <!-- REGISTER -->
+  <div class="aform" id="regForm">
+    <h2>Create Account</h2><p class="sub">Register for view-only access</p>
+    <div id="rErr" class="aerr"></div><div id="rOk" class="aok"></div>
+    <div class="f2">
+      <div class="fg"><label>Full Name *</label><input type="text" id="rName" placeholder="Full name"></div>
+      <div class="fg"><label>Username *</label><input type="text" id="rUser" placeholder="Choose username"></div>
+    </div>
+    <div class="f2">
+      <div class="fg"><label>Email</label><input type="email" id="rEmail" placeholder="Email"></div>
+      <div class="fg"><label>Contact No.</label><input type="text" id="rContact" placeholder="Phone"></div>
+    </div>
+    <div class="f2">
+      <div class="fg"><label>Department</label><input type="text" id="rDept" placeholder="Department"></div>
+      <div class="fg"><label>Designation</label><input type="text" id="rDesig" placeholder="Your role"></div>
+    </div>
+    <div class="fg"><label>Security Question</label>
+      <select id="rSecQ">
+        <option value="">-- Select a security question --</option>
+        <option>What is your mother's maiden name?</option>
+        <option>What was the name of your first school?</option>
+        <option>What is your date of birth? (DD/MM/YYYY)</option>
+        <option>What is your favourite city?</option>
+        <option>What is your employee ID number?</option>
+      </select>
+    </div>
+    <div class="fg"><label>Security Answer *</label><input type="text" id="rSecA" placeholder="Your answer"></div>
+    <div class="f2">
+      <div class="fg"><label>Password *</label><div class="pww"><input type="password" id="rPass" placeholder="Min 6 chars"><button class="pwt" id="rPwT">&#128065;</button></div></div>
+      <div class="fg"><label>Confirm *</label><div class="pww"><input type="password" id="rPass2" placeholder="Repeat"><button class="pwt" id="rPwT2">&#128065;</button></div></div>
+    </div>
+    <button class="abtn" id="regBtn">Create Account</button>
+  </div>
+  <!-- FORGOT PASSWORD -->
+  <div class="aform" id="forgotForm">
+    <h2>Forgot Password</h2><p class="sub">Reset your password using security question</p>
+    <div id="fpErr" class="aerr"></div><div id="fpOk" class="aok"></div>
+    <div class="sq-step on" id="fpStep1">
+      <div class="fg"><label>Username</label><input type="text" id="fpUser" placeholder="Enter your username"></div>
+      <button class="abtn" id="fpNextBtn">Continue</button>
+    </div>
+    <div class="sq-step" id="fpStep2">
+      <div class="fg"><label>Security Question</label><input type="text" id="fpQuestion" disabled style="background:#f3f4f6;color:#374151;"></div>
+      <div class="fg"><label>Your Answer</label><input type="text" id="fpAnswer" placeholder="Enter your answer"></div>
+      <button class="abtn" id="fpVerifyBtn">Verify Answer</button>
+    </div>
+    <div class="sq-step" id="fpStep3">
+      <div class="fg"><label>New Password *</label><div class="pww"><input type="password" id="fpNewPass" placeholder="Min 6 chars"><button class="pwt" id="fpPwT">&#128065;</button></div></div>
+      <div class="fg"><label>Confirm New Password *</label><div class="pww"><input type="password" id="fpNewPass2" placeholder="Repeat"><button class="pwt" id="fpPwT2">&#128065;</button></div></div>
+      <button class="abtn" id="fpSaveBtn">Save New Password</button>
+    </div>
+    <div style="text-align:center;margin-top:14px;"><button id="backToLoginBtn" style="background:none;border:none;cursor:pointer;color:#0369a1;font-size:13px;font-weight:600;text-decoration:underline;">Back to Login</button></div>
+  </div>
+</div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     PAGE 1: MASTER EMPLOYEE SHEET
-═══════════════════════════════════════ -->
-<div class="page active" id="page-master">
-  <div class="master-top">
-    <h2>Master Employee Sheet</h2>
-    <p>Manage all employees and their safety records.</p>
-    <button class="add-emp-btn" onclick="openAddModal()">
-      <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-      Add New Employee
-    </button>
-  </div>
-
-  <div class="emp-list-card">
-    <div class="search-row">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="masterSearch" placeholder="Search by name or ID..." oninput="renderMaster()">
-    </div>
-    <table class="emp-table">
-      <thead>
-        <tr>
-          <th>SL NO</th>
-          <th>Name</th>
-          <th>Trade</th>
-          <th>ID No</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="masterTbody"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     PAGE 2: EMPLOYEE FORM
-═══════════════════════════════════════ -->
-<div class="page" id="page-form">
-  <div class="form-page-header no-print">
-    <h2>Employee Form</h2>
-    <div class="header-btns">
-      <button class="new-entry-btn" onclick="addNewRow()">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        New Entry
-      </button>
-      <button class="print-btn" onclick="printForm()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        Print Form
-      </button>
+<!-- APP SHELL -->
+<div id="appShell">
+  <div class="hdr">
+    <div class="hdr-logo"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg></div>
+    <span class="hdr-title">Safety Management System</span>
+    <button id="backBtn">&#8592; Back to Master Sheet</button>
+    <div class="hdr-right">
+      <div class="upill" id="userPill"><div class="uav" id="hdrAv">A</div><span class="unm" id="hdrNm">Admin</span><span class="urb" id="hdrRb">Admin</span></div>
+      <button class="logoutbtn" id="logoutBtn">Logout</button>
     </div>
   </div>
-
-  <div class="official-form" id="officialForm">
-    <div class="form-company-name">Petrotechnic General Contracting L.L.C. SPC</div>
-    <div class="form-title">Safety Item Issuing Form</div>
-    <hr class="form-divider">
-
-    <table class="form-info-table">
-      <tr>
-        <td class="lbl">NAME:</td>
-        <td class="val" id="f-name" colspan="3">—</td>
-        <td class="lbl">ID NO:</td>
-        <td class="val" id="f-idno">—</td>
-      </tr>
-      <tr>
-        <td class="lbl">TRADE:</td>
-        <td class="val" id="f-trade" colspan="5">—</td>
-      </tr>
-    </table>
-
-    <div class="data-table-wrap">
-      <table class="data-table" id="issueTable">
-        <thead>
-          <tr>
-            <th style="width:42px;">SL NO</th>
-            <th style="min-width:90px;">DATE</th>
-            <th style="min-width:80px;">COVERALL</th>
-            <th style="min-width:70px;">SHOES</th>
-            <th style="min-width:72px;">HELMET</th>
-            <th style="min-width:78px;">S.GLASS</th>
-            <th style="min-width:80px;">S.JACKET</th>
-            <th style="min-width:90px;">TOOLS GIVEN</th>
-            <th style="min-width:100px;">TOOLS RETURNED</th>
-            <th style="min-width:110px;">EMPLOYEE SIGN</th>
-            <th style="min-width:90px;">ISSUED BY</th>
-            <th class="no-print" style="width:36px;"></th>
-          </tr>
-        </thead>
-        <tbody id="issueTableBody"></tbody>
+  <div id="adminNav">
+    <button class="ntab on" id="tabMaster">&#128203; Master Sheet</button>
+    <button class="ntab" id="tabUsers">&#128101; Registered Users</button>
+  </div>
+  <div class="pg on" id="pgMaster">
+    <div class="mtop">
+      <div><h2>Master Employee Sheet</h2><p>Manage all employees and their safety records.</p></div>
+      <button id="addEmpBtn">&#43; Add New Employee</button>
+    </div>
+    <div class="lcard">
+      <div class="srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" id="masterSearch" placeholder="Search by name or ID..."></div>
+      <table class="etbl"><thead><tr><th>SL</th><th>Name</th><th>Trade</th><th>ID No</th><th>Action</th></tr></thead><tbody id="masterTbody"></tbody></table>
+    </div>
+  </div>
+  <div class="pg" id="pgForm">
+    <div id="readonlyBar">&#128274; View-only mode. Only Admin can add or edit records.</div>
+    <div class="fphdr no-print">
+      <h2>Employee Form</h2>
+      <div class="fhbtns"><button id="newRowBtn">&#43; New Entry</button><button class="prbtn" id="printBtn">&#128424; Print Form</button></div>
+    </div>
+    <div class="offform">
+      <div class="conm">Petrotechnic General Contracting L.L.C. SPC</div>
+      <div class="cotl">Safety Item Issuing Form</div>
+      <hr class="coline">
+      <table class="itbl">
+        <tr><td class="lbl">NAME:</td><td style="font-weight:600" id="fName" colspan="3"></td><td class="lbl">ID NO:</td><td style="font-weight:600" id="fIdno"></td></tr>
+        <tr><td class="lbl">TRADE:</td><td style="font-weight:600" id="fTrade" colspan="5"></td></tr>
       </table>
-    </div>
-
-    <div style="margin-top:28px;text-align:center;font-size:12px;color:#6b7280;">
-      Musaffah25, Plot No. 17, Abu Dhabi United Arab Emirates. P.O Box 91646<br>
-      Tel: 02-5544554, Fax: 02-5544554 &nbsp;|&nbsp; E-mail: info@chenoth.com &nbsp;|&nbsp; Web: www.chenoth.com
-    </div>
-  </div>
-</div>
-
-<!-- ADD EMPLOYEE MODAL -->
-<div class="modal-overlay" id="addModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeAddModal()">✕</button>
-    <h3>Add New Employee</h3>
-    <div class="form-2col">
-      <div class="fg">
-        <label>Employee Name *</label>
-        <input type="text" id="a-name" placeholder="Full name">
+      <div class="dwrap">
+        <table class="dtbl">
+          <thead><tr><th>SL</th><th>DATE</th><th>COVERALL</th><th>SHOES</th><th>HELMET</th><th>S.GLASS</th><th>S.JACKET</th><th>TOOLS GIVEN</th><th>TOOLS RETURNED</th><th>EMP SIGN</th><th>ISSUED BY</th><th class="no-print" id="actColHd"></th></tr></thead>
+          <tbody id="issueTbody"></tbody>
+        </table>
       </div>
-      <div class="fg">
-        <label>Trade / Designation *</label>
-        <input type="text" id="a-trade" placeholder="e.g. Fitter">
-      </div>
-    </div>
-    <div class="form-2col">
-      <div class="fg">
-        <label>ID No. *</label>
-        <input type="text" id="a-idno" placeholder="e.g. 1003 or Jt00001">
-      </div>
-      <div class="fg">
-        <label>Nationality</label>
-        <input type="text" id="a-nation" placeholder="Nationality">
-      </div>
-    </div>
-    <div class="form-2col">
-      <div class="fg">
-        <label>Department</label>
-        <input type="text" id="a-dept" placeholder="Department">
-      </div>
-      <div class="fg">
-        <label>Contact No.</label>
-        <input type="text" id="a-contact" placeholder="Phone">
-      </div>
-    </div>
-    <div class="form-2col">
-      <div class="fg">
-        <label>Date of Joining</label>
-        <input type="date" id="a-doj">
-      </div>
-      <div class="fg">
-        <label>Status</label>
-        <select id="a-status">
-          <option>Active</option>
-          <option>Inactive</option>
-        </select>
-      </div>
-    </div>
-    <div id="add-err" style="color:#dc2626;font-size:13px;margin-top:-6px;display:none;"></div>
-    <div class="modal-btns">
-      <button class="btn-black" onclick="saveEmployee()">Add Employee</button>
-      <button class="btn-ghost" onclick="closeAddModal()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- EDIT EMPLOYEE MODAL -->
-<div class="modal-overlay" id="editModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeEditModal()">&#x2715;</button>
-    <h3>Edit Employee</h3>
-    <input type="hidden" id="e-orig-idno">
-    <div class="form-2col">
-      <div class="fg"><label>Employee Name *</label><input type="text" id="e-name" placeholder="Full name"></div>
-      <div class="fg"><label>Trade / Designation *</label><input type="text" id="e-trade" placeholder="e.g. Fitter"></div>
-    </div>
-    <div class="form-2col">
-      <div class="fg"><label>ID No. *</label><input type="text" id="e-idno" placeholder="e.g. 1003"></div>
-      <div class="fg"><label>Nationality</label><input type="text" id="e-nation" placeholder="Nationality"></div>
-    </div>
-    <div class="form-2col">
-      <div class="fg"><label>Department</label><input type="text" id="e-dept" placeholder="Department"></div>
-      <div class="fg"><label>Contact No.</label><input type="text" id="e-contact" placeholder="Phone"></div>
-    </div>
-    <div class="form-2col">
-      <div class="fg"><label>Date of Joining</label><input type="date" id="e-doj"></div>
-      <div class="fg"><label>Status</label><select id="e-status"><option>Active</option><option>Inactive</option></select></div>
-    </div>
-    <div id="edit-err" style="color:#dc2626;font-size:13px;margin-top:-6px;display:none;"></div>
-    <div class="modal-btns">
-      <button class="btn-black" onclick="saveEditEmployee()">Save Changes</button>
-      <button class="btn-ghost" onclick="closeEditModal()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
-<script>
-// ──────────────────────────────────────────
-//  DATA
-// ──────────────────────────────────────────
-let employees = JSON.parse(localStorage.getItem('sms_emp') || '[]');
-let issueData  = JSON.parse(localStorage.getItem('sms_issues') || '{}'); // {empId: [{...rows}]}
-let currentEmp = null;
-
-function persist(){
-  localStorage.setItem('sms_emp', JSON.stringify(employees));
-  localStorage.setItem('sms_issues', JSON.stringify(issueData));
-}
-
-// ──────────────────────────────────────────
-//  TOAST
-// ──────────────────────────────────────────
-function toast(msg){
-  const el = document.getElementById('toast');
-  el.textContent = msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'), 2800);
-}
-
-// ──────────────────────────────────────────
-//  MASTER SHEET
-// ──────────────────────────────────────────
-function renderMaster(){
-  const q = (document.getElementById('masterSearch').value||'').toLowerCase();
-  const tbody = document.getElementById('masterTbody');
-  const filtered = employees.filter(e=>
-    e.name.toLowerCase().includes(q)||
-    e.idno.toLowerCase().includes(q)||
-    (e.trade||'').toLowerCase().includes(q)
-  );
-  if(!filtered.length){
-    tbody.innerHTML=`<tr><td colspan="5" class="no-emp">No employees found. Add your first employee above.</td></tr>`;
-    return;
-  }
-  tbody.innerHTML = filtered.map((e,i)=>`
-    <tr>
-      <td>${i+1}</td>
-      <td>
-        <div class="emp-name">${e.name}</div>
-        <span class="emp-id-badge">${e.idno}</span>
-      </td>
-      <td>${e.trade||'—'}</td>
-      <td>${e.idno}</td>
-      <td>
-        <div class="action-btns">
-          <button class="view-form-btn" onclick="openForm('${e.idno}')">&#128203; View Form</button>
-          <button class="edit-btn" onclick="openEditModal('${e.idno}')">&#9998; Edit</button>
-          <button class="del-btn" onclick="deleteEmp('${e.idno}')">&#128465; Delete</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function deleteEmp(idno){
-  if(!confirm('Delete this employee and all their records?')) return;
-  employees = employees.filter(e=>e.idno!==idno);
-  delete issueData[idno];
-  persist(); renderMaster();
-  toast('Employee deleted.');
-}
-
-// ──────────────────────────────────────────
-//  EDIT EMPLOYEE
-// ──────────────────────────────────────────
-function openEditModal(idno){
-  const emp = employees.find(e=>e.idno===idno);
-  if(!emp) return;
-  document.getElementById('e-orig-idno').value = idno;
-  document.getElementById('e-name').value    = emp.name;
-  document.getElementById('e-trade').value   = emp.trade||'';
-  document.getElementById('e-idno').value    = emp.idno;
-  document.getElementById('e-nation').value  = emp.nationality||'';
-  document.getElementById('e-dept').value    = emp.dept||'';
-  document.getElementById('e-contact').value = emp.contact||'';
-  document.getElementById('e-doj').value     = emp.doj||'';
-  document.getElementById('e-status').value  = emp.status||'Active';
-  document.getElementById('edit-err').style.display='none';
-  document.getElementById('editModal').classList.add('open');
-}
-function closeEditModal(){
-  document.getElementById('editModal').classList.remove('open');
-}
-function saveEditEmployee(){
-  const origId = document.getElementById('e-orig-idno').value;
-  const name   = document.getElementById('e-name').value.trim();
-  const trade  = document.getElementById('e-trade').value.trim();
-  const idno   = document.getElementById('e-idno').value.trim();
-  const err    = document.getElementById('edit-err');
-  if(!name||!trade||!idno){err.textContent='Name, Trade and ID No. are required.';err.style.display='block';return;}
-  // If ID changed, check no duplicate
-  if(idno !== origId && employees.find(e=>e.idno===idno)){
-    err.textContent='Another employee with this ID already exists.';err.style.display='block';return;
-  }
-  const emp = employees.find(e=>e.idno===origId);
-  if(!emp) return;
-  // If ID changed, migrate issue data
-  if(idno !== origId){
-    issueData[idno] = issueData[origId]||[];
-    delete issueData[origId];
-  }
-  emp.name        = name;
-  emp.trade       = trade;
-  emp.idno        = idno;
-  emp.nationality = document.getElementById('e-nation').value.trim();
-  emp.dept        = document.getElementById('e-dept').value.trim();
-  emp.contact     = document.getElementById('e-contact').value.trim();
-  emp.doj         = document.getElementById('e-doj').value;
-  emp.status      = document.getElementById('e-status').value;
-  persist(); renderMaster(); closeEditModal();
-  toast(`"${name}" updated successfully!`);
-}
-
-// ──────────────────────────────────────────
-//  ADD EMPLOYEE MODAL
-// ──────────────────────────────────────────
-function openAddModal(){
-  document.getElementById('addModal').classList.add('open');
-  document.getElementById('a-name').focus();
-}
-function closeAddModal(){
-  document.getElementById('addModal').classList.remove('open');
-  ['a-name','a-trade','a-idno','a-nation','a-dept','a-contact','a-doj'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('a-status').value='Active';
-  document.getElementById('add-err').style.display='none';
-}
-function saveEmployee(){
-  const name  = document.getElementById('a-name').value.trim();
-  const trade = document.getElementById('a-trade').value.trim();
-  const idno  = document.getElementById('a-idno').value.trim();
-  const err   = document.getElementById('add-err');
-  if(!name||!trade||!idno){err.textContent='Name, Trade and ID No. are required.';err.style.display='block';return;}
-  if(employees.find(e=>e.idno===idno)){err.textContent='An employee with this ID already exists.';err.style.display='block';return;}
-  employees.push({
-    name, trade, idno,
-    nationality: document.getElementById('a-nation').value.trim(),
-    dept: document.getElementById('a-dept').value.trim(),
-    contact: document.getElementById('a-contact').value.trim(),
-    doj: document.getElementById('a-doj').value,
-    status: document.getElementById('a-status').value
-  });
-  persist(); renderMaster(); closeAddModal();
-  toast(`"${name}" added successfully!`);
-}
-
-// ──────────────────────────────────────────
-//  EMPLOYEE FORM PAGE
-// ──────────────────────────────────────────
-function openForm(idno){
-  const emp = employees.find(e=>e.idno===idno);
-  if(!emp) return;
-  currentEmp = emp;
-
-  // Fill header info
-  document.getElementById('f-name').textContent  = emp.name.toUpperCase();
-  document.getElementById('f-idno').textContent  = emp.idno;
-  document.getElementById('f-trade').textContent = (emp.trade||'').toUpperCase();
-
-  // Show back btn
-  document.getElementById('backBtn').style.display = 'flex';
-
-  // Render saved rows
-  renderIssueTable();
-
-  // Switch page
-  document.getElementById('page-master').classList.remove('active');
-  document.getElementById('page-form').classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function showMaster(){
-  document.getElementById('page-form').classList.remove('active');
-  document.getElementById('page-master').classList.add('active');
-  document.getElementById('backBtn').style.display='none';
-  currentEmp = null;
-}
-
-// ──────────────────────────────────────────
-//  ISSUE TABLE ROWS
-// ──────────────────────────────────────────
-function getRows(){
-  if(!currentEmp) return [];
-  return issueData[currentEmp.idno] || [];
-}
-function setRows(rows){
-  if(!currentEmp) return;
-  issueData[currentEmp.idno] = rows;
-  persist();
-}
-
-function renderIssueTable(){
-  const rows = getRows();
-  const tbody = document.getElementById('issueTableBody');
-  // Always show at least 19 rows like the original form
-  const displayCount = Math.max(19, rows.length + 3);
-  let html = '';
-  for(let i=0; i<displayCount; i++){
-    const r = rows[i] || {};
-    const fields = ['date','coverall','shoes','helmet','sglass','sjacket','toolsgiven','toolsret','empsign','issuedby'];
-    html += `<tr data-row="${i}">
-      <td class="slno">${i+1}</td>
-      ${fields.map(f=>`<td><input class="editable-cell" type="${f==='date'?'date':'text'}" value="${r[f]||''}" onchange="saveCell(${i},'${f}',this.value)" placeholder=""></td>`).join('')}
-      <td class="no-print"><button class="del-row-btn" onclick="deleteRow(${i})" title="Delete row">✕</button></td>
-    </tr>`;
-  }
-  tbody.innerHTML = html;
-}
-
-function saveCell(rowIdx, field, val){
-  const rows = getRows();
-  while(rows.length <= rowIdx) rows.push({});
-  rows[rowIdx][field] = val;
-  setRows(rows);
-}
-
-function addNewRow(){
-  const rows = getRows();
-  rows.push({date: new Date().toISOString().slice(0,10)});
-  setRows(rows);
-  renderIssueTable();
-  // scroll to new row
-  setTimeout(()=>{
-    const lastRow = document.querySelector('#issueTableBody tr:last-child');
-    if(lastRow) lastRow.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },100);
-  toast('New row added.');
-}
-
-function deleteRow(idx){
-  const rows = getRows();
-  if(rows[idx] && Object.values(rows[idx]).some(v=>v)){
-    if(!confirm('Delete this row?')) return;
-  }
-  rows.splice(idx, 1);
-  setRows(rows);
-  renderIssueTable();
-}
-
-function printForm(){
-  window.print();
-}
-
-// ──────────────────────────────────────────
-//  CLOSE MODAL ON OVERLAY CLICK
-// ──────────────────────────────────────────
-document.getElementById('addModal').addEventListener('click', function(e){
-  if(e.target === this) closeAddModal();
-});
-document.getElementById('editModal').addEventListener('click', function(e){
-  if(e.target === this) closeEditModal();
-});
-
-// ──────────────────────────────────────────
-//  KEYBOARD: Enter to save employee
-// ──────────────────────────────────────────
-document.getElementById('addModal').addEventListener('keydown', e=>{
-  if(e.key==='Enter') saveEmployee();
-});
-
-// ──────────────────────────────────────────
-//  INIT
-// ──────────────────────────────────────────
-renderMaster();
-</script>
-</body>
-</html>
+      <div class="ffoot">Mus
